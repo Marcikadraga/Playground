@@ -1,19 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title id="alma">Document</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css"
-        rel="stylesheet" />
-        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-</head>
-
-<body>
-    <script>
-
+function MyTTT() {
+    this.DisplayData = function () {
         var roundCounter = 0
         var theWinner = "";
         var draw = true;
@@ -48,7 +34,7 @@
                 field.style.backgroundColor = "grey";
                 field.style.border = "thick solid white"
                 field.onclick = "showId()";
-                document.getElementById(table).appendChild(field);
+                document.getElementById("games").appendChild(field);
 
                 document.getElementById(id);
                 field.onclick = function () { playerClick() }
@@ -161,7 +147,6 @@
         }
         drawTheTable();
         console.log(roundCounter)
-    </script>
-</body>
-
-</html>
+    }
+}
+var t = new MyTTT();
