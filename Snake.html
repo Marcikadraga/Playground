@@ -9,19 +9,24 @@
 
 <body></body>
 <script>
+
     var array = [];
-    var snakeBody = [[1, 0], [1, 1], [1, 2]];
+    var snakeColorArray = []
+    var snakeBody = [[1, 0]];
     var snakeHeadPosition = snakeBody[snakeBody.length - 1];
     var yTableSize = 23;
     var xTableSize = 23;
     var lastPushedButton = 'ArrowRight'
     var snakeSize = 30;
     var gameSpeed = 100;
-
+    var counter = 0;
     var yfoodPosition = Math.floor(Math.random() * yTableSize);
     var xfoodPosition = Math.floor(Math.random() * xTableSize);
     var foodPosition = [yfoodPosition, xfoodPosition]
-    var color = 'red';
+    var foodColor = 'red';
+    var snakeColorFieldsCounter = 0;
+    var nonsnakeColorFieldsCounter = 529;
+    var gameIsRunning = true;
 
     var isFood = false;
 
@@ -42,7 +47,6 @@
             field.style.left = fieldSize * x + "px";
             field.style.top = fieldSize * y + "px";
             field.style.position = "absolute";
-            field.style.backgroundColor = "grey"
             document.body.appendChild(field)
         }
     }
@@ -72,7 +76,7 @@
     class Snake {
 
         DrawTheSnake() {
-            for (var i = 0; i < snakeBody.length; i++) {
+            for (var i = 0; i < snakeBody.length - 1; i++) {
                 document.getElementById(array[snakeBody[i][0]][snakeBody[i][1]].getID).style.backgroundColor = "CornflowerBlue";
             }
         }
@@ -85,49 +89,55 @@
         DontGrow() {
             snakeBody.splice(0, 1)
         }
+        SnakeIsDead() {
+            for (var i = 0; i < snakeBody.length; i++) {
+                for (var j = 0; j < snakeBody.length; j++) {
+                    if (snakeBody[i][0] == snakeBody[j][0] && snakeBody[i][1] == snakeBody[j][1]) {
+                        counter++;
+                        if (counter == 2) {
+                            gameIsRunning = false;
+                        }
+                    }
+                }
+                counter = 0;
+            }
+
+
+        }
     }
     class Food {
 
         PlaceFood() {
-            document.getElementById(array[yfoodPosition][xfoodPosition].getID).style.backgroundColor = color;
+            document.getElementById(array[yfoodPosition][xfoodPosition].getID).style.backgroundColor = foodColor;
         }
     }
 
     class Control {
         Move(pushedButton) {
+            
             var yDirection = 0;
             var xDirection = 0;
 
-            if (pushedButton == 'ArrowUp') {
-                if (lastPushedButton != 'ArrowDown') {
-                    yDirection = -1;
-                    lastPushedButton = 'ArrowUp'
-                }
+            if (pushedButton == 'ArrowUp' && lastPushedButton != 'ArrowDown') {
+                yDirection = -1;
+                lastPushedButton = 'ArrowUp'
             }
-            if (pushedButton == 'ArrowDown') {
-                if (lastPushedButton != 'ArrowUp') {
-                    yDirection = 1;
-                    lastPushedButton = 'ArrowDown'
-                }
+            if (pushedButton == 'ArrowDown' && lastPushedButton != 'ArrowUp') {
+                yDirection = 1;
+                lastPushedButton = 'ArrowDown'
             }
-            if (pushedButton == 'ArrowLeft') {
-                if (lastPushedButton != 'ArrowRight') {
-                    xDirection = -1;
-                    lastPushedButton = 'ArrowLeft'
-                }
+            if (pushedButton == 'ArrowLeft' && lastPushedButton != 'ArrowRight') {
+                xDirection = -1;
+                lastPushedButton = 'ArrowLeft'
             }
-            if (pushedButton == 'ArrowRight') {
-                if (lastPushedButton != 'ArrowLeft') {
-                    xDirection = 1;
-                    lastPushedButton = 'ArrowRight'
-                }
+            if (pushedButton == 'ArrowRight' && lastPushedButton != 'ArrowLeft') {
+                xDirection = 1;
+                lastPushedButton = 'ArrowRight'
             }
-            //add new part to snake
             snakeBody.push([]);
             snakeBody[snakeBody.length - 1].push(snakeBody[snakeBody.length - 2][0] + yDirection);
             snakeBody[snakeBody.length - 1].push(snakeBody[snakeBody.length - 2][1] + xDirection);
             snakeHeadPosition = snakeBody[snakeBody.length - 1];
-            //remove the last item from the snake
 
             table.RedrawTheTable();
             food.PlaceFood();
@@ -137,7 +147,7 @@
             if (snakeHeadPosition[0] == foodPosition[0] && snakeHeadPosition[1] == foodPosition[1]) {
                 snake.Eat();
             }
-            else {
+            else{
                 snake.DontGrow();
             }
         }
@@ -146,51 +156,30 @@
         Sleep() {
             const timer = ms => new Promise(res => setTimeout(res, ms))
             async function load() {
-                while (true) {
+                while (gameIsRunning) {
                     await timer(gameSpeed);
+                    var snake = new Snake();
+                    snake.SnakeIsDead()
                     control.Move(lastPushedButton);
-
                 }
             }
             load();
             document.querySelector('body').addEventListener('keydown', function (e) {
                 control.Move(e.key)
-                console.log(e.key)
+                
+
             })
         }
-    }
-
-    class PlayerAction {
-
-        // PauseGame() {
-        //     document.querySelector('body').addEventListener('keydown', function (e) {
-        //         control.Move(e.key)
-        //         if (e.key == 'p') {
-        //             gameSpeed = 999999999
-        //         }
-
-        //     })
-
-
-        // }
-        // ResumeGame() {
-        //     document.querySelector('body').addEventListener('keydown', function (e) {
-        //         control.Move(e.key)
-        //         if (e.key == 'r') {
-        //             gameSpeed = 999999999
-        //         }
-        //     })
-        // }
     }
     class Main {
 
         StartTheGame() {
+            timer.Sleep();
             table.DisplayTheTable();
             snake.DrawTheSnake();
-            timer.Sleep();
+
         }
     }
-
     var snake = new Snake();
     var field = new Field();
     var table = new Table();
@@ -198,12 +187,7 @@
     var timer = new Timer();
     var main = new Main();
     var food = new Food();
-    var playerAction = new PlayerAction();
-
     main.StartTheGame();
-    playerAction.PauseGame();
-    playerAction.ResumeGame();
-
 </script>
 
 </html>
