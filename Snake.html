@@ -118,31 +118,47 @@
             var yDirection = 0;
             var xDirection = 0;
 
-            if (pushedButton == 'ArrowUp' && lastPushedButton != 'ArrowDown') {
+            if (pushedButton === 'ArrowUp' && lastPushedButton!=='ArrowDown') {
                 yDirection = -1;
-                lastPushedButton = 'ArrowUp'
+                lastPushedButton = 'ArrowUp';
             }
-            if (pushedButton == 'ArrowDown' && lastPushedButton != 'ArrowUp') {
+            else if (pushedButton === 'ArrowDown' && lastPushedButton!=='ArrowUp') {
                 yDirection = 1;
-                lastPushedButton = 'ArrowDown'
+                lastPushedButton = 'ArrowDown';
             }
-            if (pushedButton == 'ArrowLeft' && lastPushedButton != 'ArrowRight') {
+            else if (pushedButton === 'ArrowLeft' && lastPushedButton!=='ArrowRight') {
                 xDirection = -1;
-                lastPushedButton = 'ArrowLeft'
+                lastPushedButton = 'ArrowLeft';
             }
-            if (pushedButton == 'ArrowRight' && lastPushedButton != 'ArrowLeft') {
+            else if (pushedButton === 'ArrowRight' && lastPushedButton!=='ArrowLeft') {
                 xDirection = 1;
-                lastPushedButton = 'ArrowRight'
+                lastPushedButton = 'ArrowRight';
             }
+            else if(pushedButton === 'ArrowUp' && lastPushedButton==='ArrowDown') {
+                yDirection = 1;
+                lastPushedButton = 'ArrowDown';
+            }
+            else if (pushedButton === 'ArrowDown' && lastPushedButton==='ArrowUp') {
+                yDirection = -1;
+                lastPushedButton = 'ArrowUp';
+            }
+            else if (pushedButton === 'ArrowLeft' && lastPushedButton==='ArrowRight') {
+                xDirection = 1;
+                lastPushedButton = 'ArrowRight';
+            }
+            else if (pushedButton === 'ArrowRight' && lastPushedButton==='ArrowLeft') {
+                xDirection = -1;
+                lastPushedButton = 'ArrowLeft';
+            }
+
             snakeBody.push([]);
-            snakeBody[snakeBody.length - 1].push(snakeBody[snakeBody.length - 2][0] + yDirection);
-            snakeBody[snakeBody.length - 1].push(snakeBody[snakeBody.length - 2][1] + xDirection);
+            snakeBody[snakeBody.length -1].push(snakeBody[snakeBody.length - 2][0] + yDirection);
+            snakeBody[snakeBody.length -1].push(snakeBody[snakeBody.length - 2][1] + xDirection);
             snakeHeadPosition = snakeBody[snakeBody.length - 1];
 
             table.RedrawTheTable();
             food.PlaceFood();
             snake.DrawTheSnake();
-
 
             if (snakeHeadPosition[0] == foodPosition[0] && snakeHeadPosition[1] == foodPosition[1]) {
                 snake.Eat();
