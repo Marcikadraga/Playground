@@ -1,5 +1,4 @@
-function MySnake() {
-    this.DisplayData = function () {
+function StartSnake(){
 
         var array = [];
         var snakeBody = [[1, 0]];
@@ -33,7 +32,7 @@ function MySnake() {
                 field.style.left = fieldSize * x + "px";
                 field.style.top = fieldSize * y + "px";
                 field.style.position = "absolute";
-                document.getElementById("games").appendChild(field);
+                document.getElementById("gamesTable").appendChild(field);
             }
         }
         class Table {
@@ -188,5 +187,3 @@ function MySnake() {
         var food = new Food();
         main.StartTheGame();
     }
-}
-var s = new MySnake();

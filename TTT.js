@@ -1,5 +1,5 @@
-function MyTTT() {
-    this.DisplayData = function () {
+
+    function StartTTT(){
         var roundCounter = 0
         var theWinner = "";
         var draw = true;
@@ -34,7 +34,7 @@ function MyTTT() {
                 field.style.backgroundColor = "grey";
                 field.style.border = "thick solid white"
                 field.onclick = "showId()";
-                document.getElementById("games").appendChild(field);
+                document.getElementById("gamesTable").appendChild(field);
 
                 document.getElementById(id);
                 field.onclick = function () { playerClick() }
@@ -148,5 +148,5 @@ function MyTTT() {
         drawTheTable();
         console.log(roundCounter)
     }
-}
-var t = new MyTTT();
+
+var t = new StartTTT();

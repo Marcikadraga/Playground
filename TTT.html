@@ -16,7 +16,7 @@
   <title>My page</title>
 </head>
 
-<body>
+<body onload="StartTTT()">
 
 
   <!-- Optional JavaScript; choose one of the two! -->
@@ -47,7 +47,7 @@
                 Games
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a onclick="location.href='TTT.html';" class="dropdown-item" href="#">TTT</a></li>
+                <li><a onclick="location.href='TTT.html'" class="dropdown-item" href="#">TTT</a></li>
                 <li><a onclick="location.href='Snake.html'" class="dropdown-item" href="#">Snake</a></li>
               </ul>
             </li>
@@ -57,7 +57,10 @@
     </nav>
     <p id="demo"></p>
   </div>
-  
+  <div id="gamesTable" style=" background-color: white; position: absolute; width: 1000px;height: 300px;top: 10%;left: 33%;">
+    <div id="gamesPosition" style="position: absolute;background-color: white; width: 50%;height: 300px;"  >
+    </div>
+  </div>
   
 </body>
 
