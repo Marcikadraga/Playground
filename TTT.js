@@ -21,7 +21,7 @@ function MyTTT() {
 
             constructor(id, y, x) {
 
-                var fieldSize = 100;
+                var fieldSize = 200;
                 var field = document.createElement('canvas');
                 var ctx = field.getContext("2d");
                 field.id = id;

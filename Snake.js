@@ -1,9 +1,6 @@
 function MySnake() {
     this.DisplayData = function () {
 
-
-
-
         var array = [];
         var snakeBody = [[1, 0]];
         var snakeHeadPosition = snakeBody[snakeBody.length - 1];
@@ -17,12 +14,7 @@ function MySnake() {
         var xfoodPosition = Math.floor(Math.random() * xTableSize);
         var foodPosition = [yfoodPosition, xfoodPosition]
         var foodColor = 'red';
-        var snakeColorFieldsCounter = 0;
-        var nonsnakeColorFieldsCounter = 529;
         var gameIsRunning = true;
-        var score = 0;
-
-        var isFood = false;
 
         class Field {
 
@@ -41,7 +33,6 @@ function MySnake() {
                 field.style.left = fieldSize * x + "px";
                 field.style.top = fieldSize * y + "px";
                 field.style.position = "absolute";
-                //document.body.appendChild(field)
                 document.getElementById("games").appendChild(field);
             }
         }
@@ -96,8 +87,6 @@ function MySnake() {
                     }
                     counter = 0;
                 }
-
-
             }
         }
         class Food {
