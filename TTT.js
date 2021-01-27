@@ -4,14 +4,15 @@
         var theWinner = "";
         var draw = true;
 
-        var table = document.createElement('div')
-        table.id = table;
-        document.getElementById(table)
-        document.body.appendChild(table);
-        document.getElementById(table).style.margin = 'auto';
-        document.getElementById(table).style.backgroundColor = "white";
-        document.getElementById(table).style.width = "400px";
-        document.getElementById(table).style.height = "400px";
+        var gamesTable =document.createElement('div');
+        gamesTable.id=gamesTable;
+        gamesTable.style.backgroundColor='greenyellow';
+        gamesTable.style.position='absolute';
+        gamesTable.style.width="1000px";
+        gamesTable.style.height="600px";
+        gamesTable.style.top='10%';
+        gamesTable.style.left='20%';
+        document.body.appendChild(gamesTable)
 
 
 
@@ -34,7 +35,7 @@
                 field.style.backgroundColor = "grey";
                 field.style.border = "thick solid white"
                 field.onclick = "showId()";
-                document.getElementById("gamesTable").appendChild(field);
+                document.getElementById(gamesTable).appendChild(field);
 
                 document.getElementById(id);
                 field.onclick = function () { playerClick() }

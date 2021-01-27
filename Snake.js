@@ -1,5 +1,5 @@
 function StartSnake(){
-
+    
         var array = [];
         var snakeBody = [[1, 0]];
         var snakeHeadPosition = snakeBody[snakeBody.length - 1];
@@ -7,15 +7,41 @@ function StartSnake(){
         var xTableSize = 23;
         var lastPushedButton = 'ArrowRight'
         var snakeSize = 30;
-        var gameSpeed = 100;
+        
         var counter = snakeBody.length - 1;
         var yfoodPosition = Math.floor(Math.random() * yTableSize);
         var xfoodPosition = Math.floor(Math.random() * xTableSize);
         var foodPosition = [yfoodPosition, xfoodPosition]
         var foodColor = 'red';
         var gameIsRunning = true;
+        var gameSpeed = document.getElementById('speed').value;
+        
+
+        
+
+        // var gamesTable =document.createElement('div');
+        // gamesTable.id=gamesTable;
+        // gamesTable.style.backgroundColor='greenyellow';
+        // gamesTable.style.position='absolute';
+        // gamesTable.style.width="1000px";
+        // gamesTable.style.height="600px";
+        // gamesTable.style.top='10%';
+        // gamesTable.style.left='20%';
+        // document.body.appendChild(gamesTable)
+
+        // var options =document.createElement('div');
+        // options.id=gamesTable;
+        // options.style.backgroundColor='red';
+        // options.style.position='absolute';
+        // options.style.width="300px";
+        // options.style.height="600px";
+        // options.style.left='70%';
+        // document.getElementById(gamesTable).appendChild(options);
+        
+
 
         class Field {
+            
 
             get getID() {
                 return this.Id;
@@ -33,8 +59,10 @@ function StartSnake(){
                 field.style.top = fieldSize * y + "px";
                 field.style.position = "absolute";
                 document.getElementById("gamesTable").appendChild(field);
+                
             }
         }
+        
         class Table {
 
             DisplayTheTable() {
@@ -88,6 +116,7 @@ function StartSnake(){
                 }
             }
         }
+        
         class Food {
 
             PlaceFood() {
@@ -186,4 +215,5 @@ function StartSnake(){
         var main = new Main();
         var food = new Food();
         main.StartTheGame();
+        
     }
