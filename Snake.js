@@ -16,27 +16,9 @@ function StartSnake(){
         var gameIsRunning = true;
         var gameSpeed = document.getElementById('speed').value;
         
-
-        
-
-        // var gamesTable =document.createElement('div');
-        // gamesTable.id=gamesTable;
-        // gamesTable.style.backgroundColor='greenyellow';
-        // gamesTable.style.position='absolute';
-        // gamesTable.style.width="1000px";
-        // gamesTable.style.height="600px";
-        // gamesTable.style.top='10%';
-        // gamesTable.style.left='20%';
-        // document.body.appendChild(gamesTable)
-
-        // var options =document.createElement('div');
-        // options.id=gamesTable;
-        // options.style.backgroundColor='red';
-        // options.style.position='absolute';
-        // options.style.width="300px";
-        // options.style.height="600px";
-        // options.style.left='70%';
-        // document.getElementById(gamesTable).appendChild(options);
+          
+         
+          
         
 
 
@@ -189,12 +171,15 @@ function StartSnake(){
                         var snake = new Snake();
                         snake.SnakeIsDead()
                         control.Move(lastPushedButton);
+                        document.getElementById('score').innerHTML="Score: " +(snakeBody.length-1).toString();
+                        
+                    
                     }
                 }
                 load();
                 document.querySelector('body').addEventListener('keydown', function (e) {
                     control.Move(e.key)
-
+                      
 
                 })
             }
