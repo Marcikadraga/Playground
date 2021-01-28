@@ -6,12 +6,12 @@
 
         var gamesTable =document.createElement('div');
         gamesTable.id=gamesTable;
-        gamesTable.style.backgroundColor='greenyellow';
+        gamesTable.style.backgroundColor='white';
         gamesTable.style.position='absolute';
         gamesTable.style.width="1000px";
         gamesTable.style.height="600px";
         gamesTable.style.top='10%';
-        gamesTable.style.left='20%';
+        gamesTable.style.left='30%';
         document.body.appendChild(gamesTable)
 
 
