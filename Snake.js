@@ -15,10 +15,10 @@ function StartSnake() {
     var foodColor = 'red';
     var gameIsRunning = true;
     var gameSpeed = document.getElementById('speed').value;
-    var gameMode = document.getElementById('mode').value;
+
     var n = 2;
-    var direction = 'left'
-    var color='blue';
+
+    var color = 'blue';
 
     class Field {
 
@@ -38,7 +38,7 @@ function StartSnake() {
             field.style.left = fieldSize * x + "px";
             field.style.top = fieldSize * y + "px";
             field.style.position = "absolute";
-            document.getElementById("gamesTable").appendChild(field);
+            document.getElementById("snakeTable").appendChild(field);
 
         }
     }
@@ -175,40 +175,39 @@ function StartSnake() {
                     snake.SnakeIsDead()
 
 
-                    //console.log(document.getElementById("gamesTable").style.left);
-if(document.getElementById('mode').value=="insane")
-{
-    color='black'
-    function slideLeft() {
-        var tablesWidth = document.getElementById("gamesTable").style.left;
-        var newTablesWidth = tablesWidth.substring(0, tablesWidth.length - 1);
-        newTablesWidth =newTablesWidth - 0.1;
-        document.getElementById("gamesTable").style.left = newTablesWidth.toString() + "%";
-        n--
-        if (n == -4) {
-            n = 2
-        }
-    }
+                    
+                    if (document.getElementById('mode').value == "insane") {
+                        color = 'black'
+                        function slideLeft() {
+                            var tablesWidth = document.getElementById("snakeTable").style.left;
+                            var newTablesWidth = tablesWidth.substring(0, tablesWidth.length - 1);
+                            newTablesWidth = newTablesWidth - 0.1;
+                            document.getElementById("snakeTable").style.left = newTablesWidth.toString() + "%";
+                            n--
+                            if (n == -4) {
+                                n = 2
+                            }
+                        }
 
-    function slideRight() {
-        var tablesWidth = document.getElementById("gamesTable").style.left;
-        var newTablesWidth = tablesWidth.substring(0, tablesWidth.length - 1);
-        newTablesWidth = parseFloat(newTablesWidth) + 0.1;
-        document.getElementById("gamesTable").style.left = newTablesWidth.toString() + "%";
-        n--
-    }
+                        function slideRight() {
+                            var tablesWidth = document.getElementById("snakeTable").style.left;
+                            var newTablesWidth = tablesWidth.substring(0, tablesWidth.length - 1);
+                            newTablesWidth = parseFloat(newTablesWidth) + 0.1;
+                            document.getElementById("snakeTable").style.left = newTablesWidth.toString() + "%";
+                            n--
+                        }
 
-    console.log(n)
-
+                        console.log(n)
 
 
-    if (n >= 0) {
-        slideRight();
-    }
-    else {
-        slideLeft();
-    }
-}
+
+                        if (n >= 0) {
+                            slideRight();
+                        }
+                        else {
+                            slideLeft();
+                        }
+                    }
 
                 }
             }

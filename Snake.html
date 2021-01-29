@@ -7,8 +7,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script type="text/javascript" src="Snake.js"></script>
   <script type="text/javascript" src="TTT.js"></script>
-  
-  
+
+
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -18,7 +18,8 @@
 </head>
 
 <!-- <body onload="StartSnake()"> -->
-  <body>
+
+<body>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
@@ -50,47 +51,50 @@
     </nav>
     <p id="demo"></p>
   </div>
-  <div id="gamesTable" style=" background-color: white; position: absolute; width: 1000px;height: 600px;top: 10%;left: 10%;">
-    <div id="options" style=" background-color: white; position: absolute; width: 20%;height: 600px;left: 80%;">
-      <div id="score">
-        Score: 0
+  <div id="gamesTable" style=" background-color:white; position: absolute; width: 1000px;height: 600px;top: 10%;left: 10%;">
+    <div id="snakeTable" style=" background-color: white; position: absolute; width: 60%;height: 600px;left:30%"> </div>
+      <div id="options" style=" background-color: white; position: absolute; width: 20%;height: 600px;">
+        <div id="score">
+          Score: 0
+        </div>
+        <br>
+        <p>game speed:</p>
+        <form>
+          <select id="speed">
+            <option value="150">slow</option>
+            <option value="100">normal</option>
+            <option value="80">fast</option>
+          </select>
+        </form>
+        <br>
+        <p>game mode:</p>
+        <form>
+          <select id="mode">
+            <option value="normal">normal</option>
+            <option value="insane">annoying</option>
+          </select>
+        </form>
+        <br>
+        <br>
+        <button id="startButton" onclick="StartSnake()">Start the game</button>
       </div>
-      <br>
-      <p>game speed:</p>
-      <form>
-        <select id="speed" >
-        <option value="150">slow</option>
-        <option value="100">normal</option>
-        <option value="80">fast</option>
-        </select>
-      </form>
-      <br>
-      <p>game mode:</p>
-      <form>
-        <select id="mode" >
-        <option value="normal">normal</option>
-        <option value="insane">annoying</option>
-        </select>
-      </form>
-      <br>
-      <br>
-      <button id="startButton" onclick="StartSnake()">Start the game</button>
-      
     </div>
+ 
   </div>
-  <style> 
-  button {
-  background-color: #4CAF50;
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer;
-}
+  <style>
+    button {
+      background-color: #4CAF50;
+      border: none;
+      color: white;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;
+    }
+
     select {
       width: 100%;
       padding: 16px 20px;
@@ -98,8 +102,8 @@
       border-radius: 4px;
       background-color: #f1f1f1;
     }
-    </style>
-    
+  </style>
+
 </body>
 
 </html>
