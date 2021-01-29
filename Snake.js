@@ -162,6 +162,37 @@ function StartSnake() {
             }
         }
     }
+    class Mode {
+        Slide() {
+            if (document.getElementById('mode').value == "insane") {
+                color = 'black'
+                function slideLeft() {
+                    var tablesWidth = document.getElementById("snakeTable").style.left;
+                    var newTablesWidth = tablesWidth.substring(0, tablesWidth.length - 1);
+                    newTablesWidth = newTablesWidth - 0.1;
+                    document.getElementById("snakeTable").style.left = newTablesWidth.toString() + "%";
+                    n--
+                    if (n == -4) {
+                        n = 2
+                    }
+                }
+                function slideRight() {
+                    var tablesWidth = document.getElementById("snakeTable").style.left;
+                    var newTablesWidth = tablesWidth.substring(0, tablesWidth.length - 1);
+                    newTablesWidth = parseFloat(newTablesWidth) + 0.1;
+                    document.getElementById("snakeTable").style.left = newTablesWidth.toString() + "%";
+                    n--
+                }
+                console.log(n)
+                if (n >= 0) {
+                    slideRight();
+                }
+                else {
+                    slideLeft();
+                }
+            }
+        }
+    }
     class Timer {
         Sleep() {
             const timer = ms => new Promise(res => setTimeout(res, ms))
@@ -173,42 +204,7 @@ function StartSnake() {
                     control.Move(lastPushedButton);
                     document.getElementById('score').innerHTML = "Score: " + (snakeBody.length - 1).toString();
                     snake.SnakeIsDead()
-
-
-                    
-                    if (document.getElementById('mode').value == "insane") {
-                        color = 'black'
-                        function slideLeft() {
-                            var tablesWidth = document.getElementById("snakeTable").style.left;
-                            var newTablesWidth = tablesWidth.substring(0, tablesWidth.length - 1);
-                            newTablesWidth = newTablesWidth - 0.1;
-                            document.getElementById("snakeTable").style.left = newTablesWidth.toString() + "%";
-                            n--
-                            if (n == -4) {
-                                n = 2
-                            }
-                        }
-
-                        function slideRight() {
-                            var tablesWidth = document.getElementById("snakeTable").style.left;
-                            var newTablesWidth = tablesWidth.substring(0, tablesWidth.length - 1);
-                            newTablesWidth = parseFloat(newTablesWidth) + 0.1;
-                            document.getElementById("snakeTable").style.left = newTablesWidth.toString() + "%";
-                            n--
-                        }
-
-                        console.log(n)
-
-
-
-                        if (n >= 0) {
-                            slideRight();
-                        }
-                        else {
-                            slideLeft();
-                        }
-                    }
-
+                    mode.Slide();
                 }
             }
             load();
@@ -234,6 +230,7 @@ function StartSnake() {
     var timer = new Timer();
     var main = new Main();
     var food = new Food();
+    var mode = new Mode();
     main.StartTheGame();
 
 }

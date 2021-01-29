@@ -8,6 +8,14 @@
   <script type="text/javascript" src="Snake.js"></script>
   <script type="text/javascript" src="TTT.js"></script>
 
+
+
+
+
+
+
+
+
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -16,7 +24,7 @@
   <title>TTT</title>
 </head>
 
-<body onload="StartTTT()">
+<body>
 
 
 
@@ -50,10 +58,77 @@
     </nav>
     <p id="demo"></p>
   </div>
-  <!-- <div id="gamesTable" style=" background-color: white; position: absolute; width: 1000px;height: 300px;top: 10%;left: 33%;">
-    <div id="gamesPosition" style="position: absolute;background-color: white; width: 50%;height: 300px;"  >
+  <div id="gamesTable" style=" background-color:white; position: absolute; width: 1000px;height: 600px;top: 10%;left: 10%;">
+    <div id="TTTTable" style=" background-color: white; position: absolute; width: 60%;height: 600px;left:30%"> </div>
+      <div id="options" style=" background-color: white; position: absolute; width: 20%;height: 600px;">
+        
+        <br>
+        <p>player1 color:</p>
+        <form>
+          <select id="player1Color">
+            <option value="yellow">yellow</option>
+            <option value="red">red</option>
+            <option value="green">green</option>
+            <option value="white">none</option>
+          </select>
+        </form>
+        <!-- <br> -->
+        <!-- <p>player1 sign:</p>
+        <form>
+          <select id="player1Sign">
+            <option value="X">X</option>
+            <option value="O">O</option>
+          </select>
+        </form>        
+        <br> -->
+        <br>
+        <p>player2 color:</p>
+        <form>
+          <select id="player2Color">
+            <option value="red">red</option>
+            <option value="yellow">yellow</option>
+            <option value="green">green</option>
+            <option value="white">none</option>
+          </select>
+        </form>
+        <!-- <br>
+        <p>player2 sign:</p>
+        <form>
+          <select id="player2Sign">
+            <option value="O">O</option>
+            <option value="X">X</option>
+          </select>
+        </form>   -->
+        <br> 
+        <br>
+
+        <button id="startButton" onclick="StartTTT()">Start the game</button>     
+      </div>
+      
     </div>
-  </div> -->
+    <style>
+      button {
+        background-color: #4CAF50;
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+      }
+  
+      select {
+        width: 100%;
+        padding: 16px 20px;
+        border: none;
+        border-radius: 4px;
+        background-color: #f1f1f1;
+      }
+    </style>
+
   
 </body>
 
