@@ -182,6 +182,16 @@ function StartSnake() {
                     snakeBody[snakeBody.length - 1].push(snakeBody[snakeBody.length - 2][0]) 
                     snakeBody[snakeBody.length - 1].push(0);
                 }
+                if(snakeBody[snakeBody.length - 2][0] + yDirection==-1)
+                {
+                    snakeBody[snakeBody.length - 1].push(yTableSize-1);
+                    snakeBody[snakeBody.length - 1].push(snakeBody[snakeBody.length - 2][1])  
+                }
+                if(snakeBody[snakeBody.length - 2][1] + xDirection==-1)
+                {
+                    snakeBody[snakeBody.length - 1].push(snakeBody[snakeBody.length - 2][0]) 
+                    snakeBody[snakeBody.length - 1].push(xTableSize-1);
+                }
                 else
                 {
                     snakeBody[snakeBody.length - 1].push(snakeBody[snakeBody.length - 2][0] + yDirection); 
