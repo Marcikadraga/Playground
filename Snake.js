@@ -12,9 +12,13 @@ function StartSnake() {
     var yfoodPosition = Math.floor(Math.random() * yTableSize);
     var xfoodPosition = Math.floor(Math.random() * xTableSize);
     var foodPosition = [yfoodPosition, xfoodPosition]
-    var foodColor = 'red';
+
     var gameIsRunning = true;
     var gameSpeed = document.getElementById('speed').value;
+    var tableColor1="#3F6E73";
+    var tableColor2="#324B4E";
+    var snakeColor="#5EC267";
+    var foodColor="#974F76";
 
     var n = 2;
 
@@ -58,10 +62,10 @@ function StartSnake() {
         RedrawTheTable() {
             for (var i = 0; i < yTableSize * xTableSize; i++) {
                 if (i % 2 == 0) {
-                    document.getElementById(i).style.backgroundColor = "grey";
+                    document.getElementById(i).style.backgroundColor = tableColor1;
                 }
                 else {
-                    document.getElementById(i).style.backgroundColor = "white";
+                    document.getElementById(i).style.backgroundColor = tableColor2;
                 }
             }
         }
@@ -69,9 +73,11 @@ function StartSnake() {
     class Snake {
 
         DrawTheSnake() {
+            
             for (var i = 0; i < snakeBody.length - 1; i++) {
-                document.getElementById(array[snakeBody[i][0]][snakeBody[i][1]].getID).style.backgroundColor = color;
+                document.getElementById(array[snakeBody[i][0]][snakeBody[i][1]].getID).style.backgroundColor = snakeColor;
             }
+        
         }
 
         Eat() {
@@ -88,7 +94,7 @@ function StartSnake() {
                     if (snakeBody[i][0] == snakeBody[j][0] && snakeBody[i][1] == snakeBody[j][1]) {
                         counter++;
                         if (counter == 2) {
-                            gameIsRunning = false;
+                            gameSettings.Die()
                             document.getElementById('score').innerHTML = "dead";
                         }
                     }
@@ -146,8 +152,18 @@ function StartSnake() {
             }
 
             snakeBody.push([]);
-            snakeBody[snakeBody.length - 1].push(snakeBody[snakeBody.length - 2][0] + yDirection);
-            snakeBody[snakeBody.length - 1].push(snakeBody[snakeBody.length - 2][1] + xDirection);
+            if(snakeBody[snakeBody.length - 2][0] + yDirection==yTableSize ||snakeBody[snakeBody.length - 2][1] + xDirection==xTableSize||snakeBody[snakeBody.length - 2][0] + xDirection==0 ||snakeBody[snakeBody.length - 2][1] + xDirection==-1)
+            {
+                gameSettings.Die()
+            }
+            else
+            {
+                snakeBody[snakeBody.length - 1].push(snakeBody[snakeBody.length - 2][0] + yDirection); 
+                snakeBody[snakeBody.length - 1].push(snakeBody[snakeBody.length - 2][1] + xDirection); 
+                console.log(snakeBody[snakeBody.length - 2][1] + xDirection);
+                console.log(snakeBody[snakeBody.length - 2][0] + xDirection);
+            }
+
             snakeHeadPosition = snakeBody[snakeBody.length - 1];
 
             table.RedrawTheTable();
@@ -160,6 +176,15 @@ function StartSnake() {
             else {
                 snake.DontGrow();
             }
+        }
+    }
+    class GameSettings
+    {
+        Die()
+        {
+            var score='dead! Score is: '+parseInt(snakeBody.length-2) ;
+            document.getElementById('score').innerHTML = score;
+            gameIsRunning=false;
         }
     }
     class Mode {
@@ -195,6 +220,7 @@ function StartSnake() {
     }
     class Timer {
         Sleep() {
+            
             const timer = ms => new Promise(res => setTimeout(res, ms))
             async function load() {
                 while (gameIsRunning) {
@@ -202,18 +228,23 @@ function StartSnake() {
                     var snake = new Snake();
 
                     control.Move(lastPushedButton);
-                    document.getElementById('score').innerHTML = "Score: " + (snakeBody.length - 1).toString();
+                    if(gameIsRunning==true)
+                    {
+                        document.getElementById('score').innerHTML = "Score: " + (snakeBody.length - 1).toString();
+                    }
+                    
                     snake.SnakeIsDead()
                     mode.Slide();
                 }
             }
+            
             load();
             document.querySelector('body').addEventListener('keydown', function (e) {
                 control.Move(e.key)
 
 
             })
-        }
+    }
     }
     class Main {
 
@@ -231,7 +262,9 @@ function StartSnake() {
     var main = new Main();
     var food = new Food();
     var mode = new Mode();
+    var gameSettings=new GameSettings();
     main.StartTheGame();
+    
 
 }
 
