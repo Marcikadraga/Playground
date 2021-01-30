@@ -7,22 +7,24 @@ function StartSnake() {
     var xTableSize = 23;
     var lastPushedButton = 'ArrowRight'
     var snakeSize = 30;
-
+    var yDirection = 0;
+    var xDirection = 0;
     var counter = snakeBody.length - 1;
     var yfoodPosition = Math.floor(Math.random() * yTableSize);
     var xfoodPosition = Math.floor(Math.random() * xTableSize);
     var foodPosition = [yfoodPosition, xfoodPosition]
-
+    var gameMode=document.getElementById("mode").value;
     var gameIsRunning = true;
     var gameSpeed = document.getElementById('speed').value;
     var tableColor1="#3F6E73";
     var tableColor2="#324B4E";
     var snakeColor="#5EC267";
     var foodColor="#974F76";
-
+    var gameMode=document.getElementById('mode').value;
+ 
     var n = 2;
 
-    var color = 'blue';
+   
 
     class Field {
 
@@ -114,9 +116,9 @@ function StartSnake() {
 
     class Control {
         Move(pushedButton) {
-
             var yDirection = 0;
             var xDirection = 0;
+            
 
             if (pushedButton === 'ArrowUp' && lastPushedButton !== 'ArrowDown') {
                 yDirection = -1;
@@ -152,17 +154,44 @@ function StartSnake() {
             }
 
             snakeBody.push([]);
-            if(snakeBody[snakeBody.length - 2][0] + yDirection==yTableSize ||snakeBody[snakeBody.length - 2][1] + xDirection==xTableSize||snakeBody[snakeBody.length - 2][0] + xDirection==0 ||snakeBody[snakeBody.length - 2][1] + xDirection==-1)
+
+            if(gameMode=="normal" ||gameMode=="annoying")
             {
-                gameSettings.Die()
+                
+                if(snakeBody[snakeBody.length - 2][0] + yDirection==yTableSize ||snakeBody[snakeBody.length - 2][1] + xDirection==xTableSize||snakeBody[snakeBody.length - 2][0] + xDirection==0 ||snakeBody[snakeBody.length - 2][1] + xDirection==-1)
+                {
+                    gameSettings.Die()
+                }
+                else
+                {
+                    snakeBody[snakeBody.length - 1].push(snakeBody[snakeBody.length - 2][0] + yDirection); 
+                    snakeBody[snakeBody.length - 1].push(snakeBody[snakeBody.length - 2][1] + xDirection); 
+                    console.log(snakeBody[snakeBody.length - 2][1] + xDirection);
+                    console.log(snakeBody[snakeBody.length - 2][0] + xDirection);
+                }
             }
-            else
+            if(gameMode=="easy")
             {
-                snakeBody[snakeBody.length - 1].push(snakeBody[snakeBody.length - 2][0] + yDirection); 
-                snakeBody[snakeBody.length - 1].push(snakeBody[snakeBody.length - 2][1] + xDirection); 
-                console.log(snakeBody[snakeBody.length - 2][1] + xDirection);
-                console.log(snakeBody[snakeBody.length - 2][0] + xDirection);
+                if(snakeBody[snakeBody.length - 2][0] + yDirection==yTableSize)
+                {
+                    snakeBody[snakeBody.length - 1].push(0);
+                    snakeBody[snakeBody.length - 1].push(snakeBody[snakeBody.length - 2][1])  
+                }
+                if(snakeBody[snakeBody.length - 2][1] + xDirection==xTableSize)
+                {
+                    snakeBody[snakeBody.length - 1].push(snakeBody[snakeBody.length - 2][0]) 
+                    snakeBody[snakeBody.length - 1].push(0);
+                }
+                else
+                {
+                    snakeBody[snakeBody.length - 1].push(snakeBody[snakeBody.length - 2][0] + yDirection); 
+                    snakeBody[snakeBody.length - 1].push(snakeBody[snakeBody.length - 2][1] + xDirection); 
+                }
+                console.log(snakeBody[snakeBody.length - 2][0] + yDirection,snakeBody[snakeBody.length - 2][1] + yDirection)
+                
+            
             }
+            
 
             snakeHeadPosition = snakeBody[snakeBody.length - 1];
 
