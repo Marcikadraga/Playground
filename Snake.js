@@ -14,7 +14,7 @@ function StartSnake() {
     var xfoodPosition = Math.floor(Math.random() * xTableSize);
     var foodPosition = [yfoodPosition, xfoodPosition]
     var gameMode = document.getElementById("mode").value;
-    var gameIsRunning = true;
+    var gameIsRunning = false;
     var gameSpeed = document.getElementById('speed').value;
     var tableColor1 = "#3F6E73";
     var tableColor2 = "#324B4E";
@@ -22,6 +22,8 @@ function StartSnake() {
     var foodColor = "#974F76";
     var color = "blue"
     var n = 2;
+    var IsSnakeAlive = true;
+    var snakeNumber = 0;
 
 
 
@@ -96,6 +98,7 @@ function StartSnake() {
                         counter++;
                         if (counter == 2) {
                             gameSettings.Die()
+                            gameSettings.ShowButtons();
                             document.getElementById('score').innerHTML = "dead";
                         }
                     }
@@ -151,7 +154,7 @@ function StartSnake() {
                 xDirection = -1;
                 lastPushedButton = 'ArrowLeft';
             }
-            
+
             snakeBody.push([]);
             if (gameMode == "easy") {
                 if (snakeBody[snakeBody.length - 2][0] + yDirection == yTableSize) {
@@ -176,7 +179,7 @@ function StartSnake() {
                 }
                 console.log(snakeBody[snakeBody.length - 2][0] + yDirection, snakeBody[snakeBody.length - 2][1] + yDirection)
             }
-            else{
+            else {
                 if (snakeBody[snakeBody.length - 2][0] + yDirection == yTableSize || snakeBody[snakeBody.length - 2][1] + xDirection == xTableSize || snakeBody[snakeBody.length - 2][0] + yDirection == -1 || snakeBody[snakeBody.length - 2][1] + xDirection == -1) {
                     gameSettings.Die()
                 }
@@ -206,6 +209,17 @@ function StartSnake() {
             var score = 'dead! Score is: ' + parseInt(snakeBody.length - 2);
             document.getElementById('score').innerHTML = score;
             gameIsRunning = false;
+            IsSnakeAlive = false;
+        }
+        ShowButtons() {
+            if (gameIsRunning == false) {
+                document.getElementById("startButton").style.visibility = "visible";
+                document.getElementById("quitButton").style.visibility = "hidden";
+            }
+            if (gameIsRunning == true) {
+                document.getElementById("startButton").style.visibility = "hidden";
+                document.getElementById("quitButton").style.visibility = "visible";
+            }
         }
     }
     class Mode {
@@ -215,7 +229,7 @@ function StartSnake() {
                 function slideLeft() {
                     var tablesWidth = document.getElementById("snakeTable").style.left;
                     var newTablesWidth = tablesWidth.substring(0, tablesWidth.length - 1);
-                    newTablesWidth = newTablesWidth - 0.1;
+                    newTablesWidth = newTablesWidth - 0.3;
                     document.getElementById("snakeTable").style.left = newTablesWidth.toString() + "%";
                     n--
                     if (n == -4) {
@@ -225,7 +239,7 @@ function StartSnake() {
                 function slideRight() {
                     var tablesWidth = document.getElementById("snakeTable").style.left;
                     var newTablesWidth = tablesWidth.substring(0, tablesWidth.length - 1);
-                    newTablesWidth = parseFloat(newTablesWidth) + 0.1;
+                    newTablesWidth = parseFloat(newTablesWidth) + 0.3;
                     document.getElementById("snakeTable").style.left = newTablesWidth.toString() + "%";
                     n--
                 }
@@ -252,26 +266,31 @@ function StartSnake() {
                     if (gameIsRunning == true) {
                         document.getElementById('score').innerHTML = "Score: " + (snakeBody.length - 1).toString();
                     }
-
+                    gameSettings.ShowButtons();
                     snake.SnakeIsDead()
                     mode.Slide();
+                    //console.log(snakeBody)
+                    console.log(gameIsRunning);
                 }
             }
 
             load();
             document.querySelector('body').addEventListener('keydown', function (e) {
                 control.Move(e.key)
-
+                gameSettings.ShowButtons();
 
             })
         }
     }
     class Main {
-
         StartTheGame() {
-            timer.Sleep();
+            gameIsRunning = true;
+            if (gameIsRunning == true) {
+                document.getElementById("startButton").style.visibility = "hidden"
+            }
             table.DisplayTheTable();
             snake.DrawTheSnake();
+            timer.Sleep();
         }
     }
     var snake = new Snake();
@@ -284,7 +303,6 @@ function StartSnake() {
     var mode = new Mode();
     var gameSettings = new GameSettings();
     main.StartTheGame();
-
 
 }
 
