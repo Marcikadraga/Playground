@@ -13,18 +13,17 @@ function StartSnake() {
     var yfoodPosition = Math.floor(Math.random() * yTableSize);
     var xfoodPosition = Math.floor(Math.random() * xTableSize);
     var foodPosition = [yfoodPosition, xfoodPosition]
-    var gameMode=document.getElementById("mode").value;
+    var gameMode = document.getElementById("mode").value;
     var gameIsRunning = true;
     var gameSpeed = document.getElementById('speed').value;
-    var tableColor1="#3F6E73";
-    var tableColor2="#324B4E";
-    var snakeColor="#5EC267";
-    var foodColor="#974F76";
-    var gameMode=document.getElementById('mode').value;
- 
+    var tableColor1 = "#3F6E73";
+    var tableColor2 = "#324B4E";
+    var snakeColor = "#5EC267";
+    var foodColor = "#974F76";
+    var color = "blue"
     var n = 2;
 
-   
+
 
     class Field {
 
@@ -75,11 +74,11 @@ function StartSnake() {
     class Snake {
 
         DrawTheSnake() {
-            
+
             for (var i = 0; i < snakeBody.length - 1; i++) {
                 document.getElementById(array[snakeBody[i][0]][snakeBody[i][1]].getID).style.backgroundColor = snakeColor;
             }
-        
+
         }
 
         Eat() {
@@ -118,7 +117,7 @@ function StartSnake() {
         Move(pushedButton) {
             var yDirection = 0;
             var xDirection = 0;
-            
+
 
             if (pushedButton === 'ArrowUp' && lastPushedButton !== 'ArrowDown') {
                 yDirection = -1;
@@ -152,57 +151,42 @@ function StartSnake() {
                 xDirection = -1;
                 lastPushedButton = 'ArrowLeft';
             }
-
+            
             snakeBody.push([]);
-
-            if(gameMode=="normal" ||gameMode=="annoying")
-            {
-                
-                if(snakeBody[snakeBody.length - 2][0] + yDirection==yTableSize ||snakeBody[snakeBody.length - 2][1] + xDirection==xTableSize||snakeBody[snakeBody.length - 2][0] + xDirection==0 ||snakeBody[snakeBody.length - 2][1] + xDirection==-1)
-                {
+            if (gameMode == "easy") {
+                if (snakeBody[snakeBody.length - 2][0] + yDirection == yTableSize) {
+                    snakeBody[snakeBody.length - 1].push(0);
+                    snakeBody[snakeBody.length - 1].push(snakeBody[snakeBody.length - 2][1])
+                }
+                if (snakeBody[snakeBody.length - 2][1] + xDirection == xTableSize) {
+                    snakeBody[snakeBody.length - 1].push(snakeBody[snakeBody.length - 2][0])
+                    snakeBody[snakeBody.length - 1].push(0);
+                }
+                if (snakeBody[snakeBody.length - 2][0] + yDirection == -1) {
+                    snakeBody[snakeBody.length - 1].push(yTableSize - 1);
+                    snakeBody[snakeBody.length - 1].push(snakeBody[snakeBody.length - 2][1])
+                }
+                if (snakeBody[snakeBody.length - 2][1] + xDirection == -1) {
+                    snakeBody[snakeBody.length - 1].push(snakeBody[snakeBody.length - 2][0])
+                    snakeBody[snakeBody.length - 1].push(xTableSize - 1);
+                }
+                else {
+                    snakeBody[snakeBody.length - 1].push(snakeBody[snakeBody.length - 2][0] + yDirection);
+                    snakeBody[snakeBody.length - 1].push(snakeBody[snakeBody.length - 2][1] + xDirection);
+                }
+                console.log(snakeBody[snakeBody.length - 2][0] + yDirection, snakeBody[snakeBody.length - 2][1] + yDirection)
+            }
+            else{
+                if (snakeBody[snakeBody.length - 2][0] + yDirection == yTableSize || snakeBody[snakeBody.length - 2][1] + xDirection == xTableSize || snakeBody[snakeBody.length - 2][0] + yDirection == -1 || snakeBody[snakeBody.length - 2][1] + xDirection == -1) {
                     gameSettings.Die()
                 }
-                else
-                {
-                    snakeBody[snakeBody.length - 1].push(snakeBody[snakeBody.length - 2][0] + yDirection); 
-                    snakeBody[snakeBody.length - 1].push(snakeBody[snakeBody.length - 2][1] + xDirection); 
+                else {
+                    snakeBody[snakeBody.length - 1].push(snakeBody[snakeBody.length - 2][0] + yDirection);
+                    snakeBody[snakeBody.length - 1].push(snakeBody[snakeBody.length - 2][1] + xDirection);
                     console.log(snakeBody[snakeBody.length - 2][1] + xDirection);
                     console.log(snakeBody[snakeBody.length - 2][0] + xDirection);
                 }
             }
-            if(gameMode=="easy")
-            {
-                if(snakeBody[snakeBody.length - 2][0] + yDirection==yTableSize)
-                {
-                    snakeBody[snakeBody.length - 1].push(0);
-                    snakeBody[snakeBody.length - 1].push(snakeBody[snakeBody.length - 2][1])  
-                }
-                if(snakeBody[snakeBody.length - 2][1] + xDirection==xTableSize)
-                {
-                    snakeBody[snakeBody.length - 1].push(snakeBody[snakeBody.length - 2][0]) 
-                    snakeBody[snakeBody.length - 1].push(0);
-                }
-                if(snakeBody[snakeBody.length - 2][0] + yDirection==-1)
-                {
-                    snakeBody[snakeBody.length - 1].push(yTableSize-1);
-                    snakeBody[snakeBody.length - 1].push(snakeBody[snakeBody.length - 2][1])  
-                }
-                if(snakeBody[snakeBody.length - 2][1] + xDirection==-1)
-                {
-                    snakeBody[snakeBody.length - 1].push(snakeBody[snakeBody.length - 2][0]) 
-                    snakeBody[snakeBody.length - 1].push(xTableSize-1);
-                }
-                else
-                {
-                    snakeBody[snakeBody.length - 1].push(snakeBody[snakeBody.length - 2][0] + yDirection); 
-                    snakeBody[snakeBody.length - 1].push(snakeBody[snakeBody.length - 2][1] + xDirection); 
-                }
-                console.log(snakeBody[snakeBody.length - 2][0] + yDirection,snakeBody[snakeBody.length - 2][1] + yDirection)
-                
-            
-            }
-            
-
             snakeHeadPosition = snakeBody[snakeBody.length - 1];
 
             table.RedrawTheTable();
@@ -217,18 +201,16 @@ function StartSnake() {
             }
         }
     }
-    class GameSettings
-    {
-        Die()
-        {
-            var score='dead! Score is: '+parseInt(snakeBody.length-2) ;
+    class GameSettings {
+        Die() {
+            var score = 'dead! Score is: ' + parseInt(snakeBody.length - 2);
             document.getElementById('score').innerHTML = score;
-            gameIsRunning=false;
+            gameIsRunning = false;
         }
     }
     class Mode {
         Slide() {
-            if (document.getElementById('mode').value == "insane") {
+            if (document.getElementById('mode').value == "annoying") {
                 color = 'black'
                 function slideLeft() {
                     var tablesWidth = document.getElementById("snakeTable").style.left;
@@ -259,7 +241,7 @@ function StartSnake() {
     }
     class Timer {
         Sleep() {
-            
+
             const timer = ms => new Promise(res => setTimeout(res, ms))
             async function load() {
                 while (gameIsRunning) {
@@ -267,23 +249,22 @@ function StartSnake() {
                     var snake = new Snake();
 
                     control.Move(lastPushedButton);
-                    if(gameIsRunning==true)
-                    {
+                    if (gameIsRunning == true) {
                         document.getElementById('score').innerHTML = "Score: " + (snakeBody.length - 1).toString();
                     }
-                    
+
                     snake.SnakeIsDead()
                     mode.Slide();
                 }
             }
-            
+
             load();
             document.querySelector('body').addEventListener('keydown', function (e) {
                 control.Move(e.key)
 
 
             })
-    }
+        }
     }
     class Main {
 
@@ -301,9 +282,9 @@ function StartSnake() {
     var main = new Main();
     var food = new Food();
     var mode = new Mode();
-    var gameSettings=new GameSettings();
+    var gameSettings = new GameSettings();
     main.StartTheGame();
-    
+
 
 }
 
