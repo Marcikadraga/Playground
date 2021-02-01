@@ -3,7 +3,7 @@ function StartSnake() {
     var array = [];
     var snakeBody = [[1, 0]];
     var snakeHeadPosition = snakeBody[snakeBody.length - 1];
-    var yTableSize = 23;
+    var yTableSize =23;
     var xTableSize = 23;
     var lastPushedButton = 'ArrowRight'
     var snakeSize = 30;
@@ -99,7 +99,7 @@ function StartSnake() {
                         if (counter == 2) {
                             gameSettings.Die()
                             gameSettings.ShowButtons();
-                            document.getElementById('score').innerHTML = "dead";
+                            //document.getElementById('score').innerHTML = "dead";
                         }
                     }
                 }
@@ -206,10 +206,14 @@ function StartSnake() {
     }
     class GameSettings {
         Die() {
-            var score = 'dead! Score is: ' + parseInt(snakeBody.length - 2);
+            var score = 'Dead! Score is: ' + parseInt(snakeBody.length - 1);
             document.getElementById('score').innerHTML = score;
+            document.getElementById('score').style.color="red";
+            document.getElementById('mode').disabled=false;
+                document.getElementById('speed').disabled=false;
             gameIsRunning = false;
-            IsSnakeAlive = false;
+            IsSnakeAlive = false
+            
         }
         ShowButtons() {
             if (gameIsRunning == false) {
@@ -225,7 +229,7 @@ function StartSnake() {
     class Mode {
         Slide() {
             if (document.getElementById('mode').value == "annoying") {
-                color = 'black'
+                //color = 'black'
                 function slideLeft() {
                     var tablesWidth = document.getElementById("snakeTable").style.left;
                     var newTablesWidth = tablesWidth.substring(0, tablesWidth.length - 1);
@@ -251,6 +255,11 @@ function StartSnake() {
                     slideLeft();
                 }
             }
+            if(gameIsRunning==false)
+            {
+                gameSettings.Die();
+            }
+            
         }
     }
     class Timer {
@@ -289,6 +298,8 @@ function StartSnake() {
             gameIsRunning = true;
             if (gameIsRunning == true) {
                 document.getElementById("startButton").style.visibility = "hidden"
+                document.getElementById('mode').disabled=true;
+                document.getElementById('speed').disabled=true;
             }
             table.DisplayTheTable();
             snake.DrawTheSnake();
