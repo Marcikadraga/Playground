@@ -256,30 +256,32 @@ function StartSnake() {
     class Timer {
         Sleep() {
 
-            const timer = ms => new Promise(res => setTimeout(res, ms))
-            async function load() {
-                while (gameIsRunning) {
-                    await timer(gameSpeed);
-                    var snake = new Snake();
+                const timer = ms => new Promise(res => setTimeout(res, ms))
+                async function load() {
+                    while (gameIsRunning) {
+                        await timer(gameSpeed);
+                        var snake = new Snake();
 
-                    control.Move(lastPushedButton);
-                    if (gameIsRunning == true) {
-                        document.getElementById('score').innerHTML = "Score: " + (snakeBody.length - 1).toString();
+                        control.Move(lastPushedButton);
+                        if (gameIsRunning == true) {
+                            document.getElementById('score').innerHTML = "Score: " + (snakeBody.length - 1).toString();
+                        }
+                        gameSettings.ShowButtons();
+                        snake.SnakeIsDead()
+                        mode.Slide();
+                        //console.log(snakeBody)
+                        console.log(gameIsRunning);
                     }
-                    gameSettings.ShowButtons();
-                    snake.SnakeIsDead()
-                    mode.Slide();
-                    //console.log(snakeBody)
-                    console.log(gameIsRunning);
                 }
-            }
 
-            load();
-            document.querySelector('body').addEventListener('keydown', function (e) {
-                control.Move(e.key)
-                gameSettings.ShowButtons();
-
-            })
+                load();
+                document.querySelector('body').addEventListener('keydown', function (e) {
+                    if (gameIsRunning == true) {
+                    control.Move(e.key)
+                    gameSettings.ShowButtons();
+                    }
+                })
+            
         }
     }
     class Main {
@@ -303,7 +305,6 @@ function StartSnake() {
     var mode = new Mode();
     var gameSettings = new GameSettings();
     main.StartTheGame();
-
 }
 
 
