@@ -3,7 +3,7 @@ function StartSnake() {
     var array = [];
     var snakeBody = [[1, 0]];
     var snakeHeadPosition = snakeBody[snakeBody.length - 1];
-    var yTableSize =23;
+    var yTableSize = 23;
     var xTableSize = 23;
     var lastPushedButton = 'ArrowRight'
     var snakeSize = 30;
@@ -206,14 +206,16 @@ function StartSnake() {
     }
     class GameSettings {
         Die() {
-            var score = 'Dead! Score is: ' + parseInt(snakeBody.length - 1);
+            var score = 'Dead! Score is: ' + parseInt(snakeBody.length - 2);
             document.getElementById('score').innerHTML = score;
-            document.getElementById('score').style.color="red";
-            document.getElementById('mode').disabled=false;
-                document.getElementById('speed').disabled=false;
+            document.getElementById('score').style.color = "red";
+            document.getElementById('mode').disabled = false;
+            document.getElementById('speed').disabled = false;
+
             gameIsRunning = false;
+            gameSettings.ShowButtons();
             IsSnakeAlive = false
-            
+
         }
         ShowButtons() {
             if (gameIsRunning == false) {
@@ -255,42 +257,48 @@ function StartSnake() {
                     slideLeft();
                 }
             }
-            if(gameIsRunning==false)
-            {
+            if (gameIsRunning == false) {
                 gameSettings.Die();
             }
-            
+
         }
     }
     class Timer {
         Sleep() {
+            if (gameIsRunning) {
+                gameSettings.ShowButtons();
+                var timer;
+                if (gameIsRunning == true) {
+                    function counter() {
+                        timer = setTimeout(function () {
+                            control.Move(lastPushedButton);
+                            if (gameIsRunning == true) {
+                                document.getElementById('score').innerHTML = "Score: " + (snakeBody.length - 1).toString();
+                            }
+                            if (gameIsRunning) {
 
-                const timer = ms => new Promise(res => setTimeout(res, ms))
-                async function load() {
-                    while (gameIsRunning) {
-                        await timer(gameSpeed);
-                        var snake = new Snake();
+                                snake.SnakeIsDead()
+                                mode.Slide();
+                                counter();
+                            }
 
-                        control.Move(lastPushedButton);
+                        }, 100);
+                    };
+                    counter();
+                    $(document).keydown(function (e) {
+                        clearTimeout(timer);
+                        //console.log(lastPushedButton)
+                        counter();
+                    });
+
+                    document.querySelector('body').addEventListener('keydown', function (e) {
                         if (gameIsRunning == true) {
-                            document.getElementById('score').innerHTML = "Score: " + (snakeBody.length - 1).toString();
+                            control.Move(e.key)
+                            gameSettings.ShowButtons();
                         }
-                        gameSettings.ShowButtons();
-                        snake.SnakeIsDead()
-                        mode.Slide();
-                        //console.log(snakeBody)
-                        console.log(gameIsRunning);
-                    }
+                    })
                 }
-
-                load();
-                document.querySelector('body').addEventListener('keydown', function (e) {
-                    if (gameIsRunning == true) {
-                    control.Move(e.key)
-                    gameSettings.ShowButtons();
-                    }
-                })
-            
+            }
         }
     }
     class Main {
@@ -298,8 +306,8 @@ function StartSnake() {
             gameIsRunning = true;
             if (gameIsRunning == true) {
                 document.getElementById("startButton").style.visibility = "hidden"
-                document.getElementById('mode').disabled=true;
-                document.getElementById('speed').disabled=true;
+                document.getElementById('mode').disabled = true;
+                document.getElementById('speed').disabled = true;
             }
             table.DisplayTheTable();
             snake.DrawTheSnake();
