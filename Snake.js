@@ -19,7 +19,7 @@ function StartSnake() {
     var tableColor1 = "#3F6E73";
     var tableColor2 = "#324B4E";
     var snakeColor = "#5EC267";
-    var foodColor = "#974F76";
+    var foodColor = "white";
     var color = "blue"
     var n = 2;
     var IsSnakeAlive = true;
@@ -209,7 +209,7 @@ function StartSnake() {
         Die() {
             var score = 'Dead! Score is: ' + parseInt(snakeBody.length - 1);
             document.getElementById('score').innerHTML = score;
-            document.getElementById('score').style.color = "red";
+            
             document.getElementById('mode').disabled = false;
             document.getElementById('speed').disabled = false;
 
@@ -304,6 +304,7 @@ function StartSnake() {
 
     class Main {
         StartTheGame() {
+            document.getElementById('score').style.color = "white";
             gameIsRunning = true;
 
             table.DisplayTheTable();
