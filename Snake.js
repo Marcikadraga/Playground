@@ -111,9 +111,18 @@ function StartSnake() {
     }
 
     class Food {
-
+        // PlaceFood() {
+        //     document.getElementById(array[yfoodPosition][xfoodPosition].getID).style.backgroundColor = foodColor;
+        // }
         PlaceFood() {
-            document.getElementById(array[yfoodPosition][xfoodPosition].getID).style.backgroundColor = foodColor;
+            for (var i = 0; i < snakeBody.length; i++) {
+                if (foodPosition[0] == snakeBody[i][0] && foodPosition[1] == snakeBody[i][1]&& snakeHeadPosition[0]!=foodPosition[0] && snakeHeadPosition[1]!=foodPosition[1]) {
+                    yfoodPosition = Math.floor(Math.random() * yTableSize);
+                    xfoodPosition = Math.floor(Math.random() * xTableSize);
+                    foodPosition = [yfoodPosition, xfoodPosition];
+                }
+            }
+            document.getElementById(array[yfoodPosition][xfoodPosition].getID).style.backgroundColor = "red";
         }
     }
 
@@ -209,7 +218,7 @@ function StartSnake() {
         Die() {
             var score = 'Dead! Score is: ' + parseInt(snakeBody.length - 1);
             document.getElementById('score').innerHTML = score;
-            
+
             document.getElementById('mode').disabled = false;
             document.getElementById('speed').disabled = false;
 
@@ -223,14 +232,14 @@ function StartSnake() {
             if (gameIsRunning == false) {
                 document.getElementById("startButton").style.visibility = "visible";
                 document.getElementById("quitButton").style.visibility = "hidden";
-                document.getElementById("speed").disabled=false;
-                document.getElementById("mode").disabled=false;
+                document.getElementById("speed").disabled = false;
+                document.getElementById("mode").disabled = false;
             }
             if (gameIsRunning == true) {
                 document.getElementById("startButton").style.visibility = "hidden";
                 document.getElementById("quitButton").style.visibility = "visible";
-                document.getElementById("speed").disabled=true;
-                document.getElementById("mode").disabled=true;
+                document.getElementById("speed").disabled = true;
+                document.getElementById("mode").disabled = true;
             }
         }
     }
@@ -285,8 +294,9 @@ function StartSnake() {
                     gameSettings.ShowButtons();
                     snake.SnakeIsDead()
                     mode.Slide();
-                    //console.log(snakeBody)
-                    console.log(gameIsRunning);
+                    console.log("snakeHeadPosition "  +snakeHeadPosition)
+                    console.log("foodposition "+foodPosition);
+                    
                 }
             }
 
