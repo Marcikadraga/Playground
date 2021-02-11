@@ -122,7 +122,7 @@ function StartSnake() {
                     foodPosition = [yfoodPosition, xfoodPosition];
                 }
             }
-            document.getElementById(array[yfoodPosition][xfoodPosition].getID).style.backgroundColor = "red";
+            document.getElementById(array[yfoodPosition][xfoodPosition].getID).style.backgroundColor = "white";
         }
     }
 
