@@ -7,8 +7,8 @@ In this project I practiced:
 - CSS,
 - bootstrap,
 - Jquery
-<img src="Pictrures/indexPicure.png" width=75% height=75%>
-<img src="Pictrures/snakePicure.png"   width=75% height=75%>
+<img src="pictrures/indexPicure.jpg" width=75% height=75%>
+<img src="pictrures/snakePicure.jpg"   width=75% height=75%>
 
 
 #### Usage:The project is available here. You can pull the whole project and play .
