@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <script src="paintingTable.js" defer></script> -->
+    <link rel="stylesheet" href="/css/paintingTable.css">
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <title>Document</title>
+
+</head>
+
+<body>
+    <div id="table">
+        <div id="saveTable">
+            <div id="box">
+                <form class="container" method="post" action="/">
+                    <div>
+                        <label style="color: white;">name: </label>
+                        <input style="width: 250px;font-size: 17px;" name="fileName" >
+                    </div>
+                    <br>
+                    <div>
+                        <textarea name="data" id="data" cols="30" rows="10"
+                            style="width: 500px; height: 500px;font-size: 10px;overflow-y:auto;"></textarea>
+                    </div>
+                    <br>
+                    <button class="saveWindowButton" >SAVE </button>
+                    
+                </form>
+                <button class="saveWindowButton" id="cancel">CANCEL </button>
+            </div>
+        </div>
+        <div id="loadTable">
+           <ul id="LoadTableUl">
+
+           </ul>
+            
+        </div>
+        <div id="status">
+            <canvas id="statusCanvas1"></canvas>
+            <!-- <canvas id="rubber">R</canvas> -->
+
+        </div>
+        <div id="options">
+            <br>
+            <div class="slidecontainer0">
+                <input type="range" min="1" max="39" value="21" class="slider0" id="myRange0">
+                <p style="color: white;">X: <span id="demo0"></span></p>
+              </div>
+
+              <div class="slidecontainer1">
+                <input type="range" min="1" max="39" value="21" class="slider1" id="myRange1">
+                <p style="color: white;">Y: <span id="demo1"></span></p>
+              </div>
+              
+              <button class="button" id="create">Create</button>
+              <br>
+              <br>
+              <br>
+              <br>
+              <button class="button" id="save">Save</button>
+              <button class="button" id="load">Load</button>
+        </div>
+        <div id="drawingTable"></div>
+        <div id="colorPalette"></div>
+    </div>
+    <script>
+       $.getJSON("/js/Data.json", function( json ) {
+         console.log( Object.keys(json).length) ;
+
+ });
+
+    </script>
+    <script src="/js/paintingTable.js"></script>
+</body>
+
+</html>
