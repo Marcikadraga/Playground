@@ -74,8 +74,8 @@ class Table {
             }
         }
 
-        document.getElementById('data').value = JSON.stringify(colorArray);
-        console.log(colorArray);
+        // // document.getElementById('data').value = JSON.stringify(colorArray);
+        // console.log(colorArray);
 
 
     }
@@ -189,6 +189,22 @@ class Options {
             document.getElementById("drawingTable").style.visibility = "hidden";
             document.getElementById("create").disabled = true;
             document.getElementById("save").disabled = true;
+            // document.getElementById('data').value = JSON.stringify(colorArray);
+            var x = document.getElementById("myRange0").value;
+            var y = document.getElementById("myRange1").value;
+            var counter = 0;
+            var colorArray = [];
+
+            for (var i = 0; i < x; i++) {
+                colorArray.push([]);
+                for (var j = 0; j < x; j++) {
+                    colorArray[i].push(document.getElementById(counter).style.backgroundColor);
+                    counter++;
+                }
+            }
+            console.log(colorArray);
+            document.getElementById('data').value = JSON.stringify(colorArray);
+
         }
     }
     CloseTheSaveTable() {
@@ -199,6 +215,7 @@ class Options {
             document.getElementById("create").disabled = false;
             document.getElementById("save").disabled = true;
 
+
         }
     }
     DisplayTheLoadTable() {
@@ -207,7 +224,7 @@ class Options {
 
             var ga;
             $.getJSON("/js/Data.json", function (json) {
-                console.log(Object.keys(json).length);
+
                 ga = Object.keys(json).length;
 
                 for (var i = 0; i < ga; i++) {
@@ -243,14 +260,17 @@ class Options {
                             var t = new Table(y, x);
                             document.getElementById("loadTable").style.visibility = "hidden";
                             t.DisplayTheTable();
-                            
-                            var counter = 0;
-                            for (var i = 0; i < json[ga - 8000].Data.length ; i++) {
-                                for (var j = 0; j < json[ga - 8000].Data[0].length; j++) {
-                                    document.getElementById(counter).style.backgroundColor == json[ga - 8000].Data[i][j].toString();
+                            console.log(ga - 8000);
+                            var counter=0;
+                            for (var i = 0; i < y; i++) {
+                                for (var j = 0; j < x; j++) {
+                                 console.log(json[ga - 8000].Data[i])
+                                    document.getElementById(counter).style.backgroundColor=json[ga - 8000].Data[i][j];
                                     counter++;
                                 }
                             }
+
+
 
                         });
 
