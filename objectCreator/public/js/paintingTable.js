@@ -62,7 +62,7 @@ class Table {
         var ctx = document.createElement('canvas').getContext('2d');
         var color;
         var colorArray = [];
-        
+
         for (var i = 0; i < this.yTableSize; i++) {
             colorArray.push([]);
             for (var j = 0; j < this.xTableSize; j++) {
@@ -73,10 +73,10 @@ class Table {
                 colorArray[i].push(hexColor);
             }
         }
-        
+
         document.getElementById('data').value = JSON.stringify(colorArray);
         console.log(colorArray);
-        
+
 
     }
 }
@@ -213,29 +213,50 @@ class Options {
                 for (var i = 0; i < ga; i++) {
                     var dataWindow = document.createElement('li');
                     dataWindow.style.position = "relative";
-                    // dataWindow.style.height = "15px";
-                    // dataWindow.style.width = "300px";
-                    dataWindow.id = 1000 + i;
+                    dataWindow.style.color = "white";
+                    dataWindow.id = 7000 + i;
                     document.getElementById("LoadTableUl").appendChild(dataWindow);
-                    dataWindow.style.backgroundColor = "red";
-                    dataWindow.innerHTML = json[i].Name;
-                }
-                for (var i = 0; i < ga; i++) {
-                    var button = document.createElement('button');
-                    document.getElementById(1000+i).appendChild(button);
-                    button.style.position="relative";
-                    button.style.left="300px";
-                    button.style.width="50px";
-                    button.style.height="30px";
-                    button.innerHTML="open";
-                    
+                    dataWindow.style.backgroundColor = "transparent";
+                    dataWindow.innerHTML = json[i].Name; var button = document.createElement('button');
+                    document.getElementById(7000 + i).appendChild(button);
+                    button.style.position = "relative";
+                    button.id = 8000 + i;
+                    button.style.float = "right";
+                    button.style.width = "50px";
+                    button.style.height = "30px";
+                    button.innerHTML = "open";
+                    button.style.display = "inline";
+                    // button.onclick = function () {console.log(this.id)
+                    button.onclick = function () {
+                        var ga = this.id;
+                        $.getJSON("/js/Data.json", function (json) {
+                            // console.log(json[ga-8000].Name)
+                            var canvasesLength = document.getElementById("drawingTable").getElementsByTagName("canvas").length;
+                            document.getElementById("drawingTable").style.visibility = "visible";
+                            for (var i = 0; i < canvasesLength; i++) {
+                                document.getElementById(i).remove();
+                            }
+                            document.getElementById("save").disabled = false;
+
+
+
+                            var x = json[ga-8000].Data.length
+                            var y = json[ga-8000].Data[0].length
+                            var t = new Table(y, x);
+                            document.getElementById("loadTable").style.visibility="hidden";
+                            t.DisplayTheTable();
+                            
+                        });
+
+                    }
+
                 }
             });
-
-
-
         }
     }
+    // LoadData() {
+
+    // }
 }
 
 class Main {

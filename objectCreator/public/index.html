@@ -33,7 +33,7 @@
                 <button class="saveWindowButton" id="cancel">CANCEL </button>
             </div>
         </div>
-        <div id="loadTable">
+        <div id="loadTable" style="position:absolute;">
            <ul id="LoadTableUl">
 
            </ul>
@@ -69,7 +69,17 @@
     </div>
     <script>
        $.getJSON("/js/Data.json", function( json ) {
-         console.log( Object.keys(json).length) ;
+         console.log( json[0].Name) ;
+         console.log( json[0].Data) ;
+         console.log( json[0].Data[0].length);
+         console.log( json[0].Data.length);
+        //  for(var i=0;i<json.length;i++)
+        //  {
+        //      if(json[i].Name=="Béla2")
+        //      {
+        //          console.log("ez ni : "+json[i].Data);
+        //      }
+        //  }
 
  });
 
