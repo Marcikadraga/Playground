@@ -238,14 +238,20 @@ class Options {
                             }
                             document.getElementById("save").disabled = false;
 
-
-
-                            var x = json[ga-8000].Data.length
-                            var y = json[ga-8000].Data[0].length
+                            var y = json[ga - 8000].Data.length
+                            var x = json[ga - 8000].Data[0].length
                             var t = new Table(y, x);
-                            document.getElementById("loadTable").style.visibility="hidden";
+                            document.getElementById("loadTable").style.visibility = "hidden";
                             t.DisplayTheTable();
                             
+                            var counter = 0;
+                            for (var i = 0; i < json[ga - 8000].Data.length ; i++) {
+                                for (var j = 0; j < json[ga - 8000].Data[0].length; j++) {
+                                    document.getElementById(counter).style.backgroundColor == json[ga - 8000].Data[i][j].toString();
+                                    counter++;
+                                }
+                            }
+
                         });
 
                     }
