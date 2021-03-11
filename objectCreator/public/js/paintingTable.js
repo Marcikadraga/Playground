@@ -190,14 +190,14 @@ class Options {
             document.getElementById("create").disabled = true;
             document.getElementById("save").disabled = true;
             // document.getElementById('data').value = JSON.stringify(colorArray);
-            var x = document.getElementById("myRange0").value;
-            var y = document.getElementById("myRange1").value;
+            var y = document.getElementById("myRange0").value;
+            var x = document.getElementById("myRange1").value;
             var counter = 0;
             var colorArray = [];
 
             for (var i = 0; i < x; i++) {
                 colorArray.push([]);
-                for (var j = 0; j < x; j++) {
+                for (var j = 0; j < y; j++) {
                     colorArray[i].push(document.getElementById(counter).style.backgroundColor);
                     counter++;
                 }
@@ -254,7 +254,6 @@ class Options {
                                 document.getElementById(i).remove();
                             }
                             document.getElementById("save").disabled = false;
-
                             var y = json[ga - 8000].Data.length
                             var x = json[ga - 8000].Data[0].length
                             var t = new Table(y, x);
@@ -269,9 +268,6 @@ class Options {
                                     counter++;
                                 }
                             }
-
-
-
                         });
 
                     }
