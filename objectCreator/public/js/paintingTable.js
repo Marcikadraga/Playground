@@ -36,7 +36,7 @@ class Table {
     DisplayTheTable() {
         
         var id = 0;
-        var fieldsize = 20
+        var fieldsize = 15
         for (var i = 0; i < this.yTableSize; i++) {
             this.array.push([]);
             for (var j = 0; j < this.xTableSize; j++) {
@@ -58,8 +58,8 @@ class Table {
             }
         }
         //set the drawTable's border's size
-        document.getElementById("drawingTable").style.height = this.yTableSize * 20 + "px";
-        document.getElementById("drawingTable").style.width = this.xTableSize * 20 + "px";
+        document.getElementById("drawingTable").style.height = this.yTableSize * fieldsize + "px";
+        document.getElementById("drawingTable").style.width = this.xTableSize * fieldsize + "px";
         var ctx = document.createElement('canvas').getContext('2d');
         var color;
         var colorArray = [];
