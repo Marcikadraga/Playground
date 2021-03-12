@@ -221,7 +221,7 @@ class Options {
     DisplayTheLoadTable() {
         document.getElementById("load").onclick = function () {
             document.getElementById("loadTable").style.visibility = "visible";
-
+            document.getElementById("drawingTable").style.visibility = "hidden";
             var ga;
             $.getJSON("/js/Data.json", function (json) {
 
@@ -256,18 +256,24 @@ class Options {
                             document.getElementById("save").disabled = false;
                             var y = json[ga - 8000].Data.length
                             var x = json[ga - 8000].Data[0].length
+                            document.getElementById("myRange0").value = x;
+                            document.getElementById("myRange1").value = y;
+                            document.getElementById("demo0").innerHTML = x;
+                            document.getElementById("demo1").innerHTML = y;
                             var t = new Table(y, x);
                             document.getElementById("loadTable").style.visibility = "hidden";
                             t.DisplayTheTable();
                             console.log(ga - 8000);
-                            var counter=0;
+                            var counter = 0;
                             for (var i = 0; i < y; i++) {
                                 for (var j = 0; j < x; j++) {
-                                 console.log(json[ga - 8000].Data[i])
-                                    document.getElementById(counter).style.backgroundColor=json[ga - 8000].Data[i][j];
+                                    console.log(json[ga - 8000].Data[i])
+                                    document.getElementById(counter).style.backgroundColor = json[ga - 8000].Data[i][j];
                                     counter++;
                                 }
                             }
+                            document.getElementById("drawingTable").style.visibility="visible";
+
                         });
 
                     }
