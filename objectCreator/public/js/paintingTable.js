@@ -243,7 +243,10 @@ class Options {
                     button.style.height = "30px";
                     button.innerHTML = "open";
                     button.style.display = "inline";
-                    // button.onclick = function () {console.log(this.id)
+
+
+
+
                     button.onclick = function () {
                         var ga = this.id;
                         $.getJSON("/js/Data.json", function (json) {
@@ -263,7 +266,7 @@ class Options {
                             var t = new Table(y, x);
                             document.getElementById("loadTable").style.visibility = "hidden";
                             t.DisplayTheTable();
-                            console.log(ga - 8000);
+
                             var counter = 0;
                             for (var i = 0; i < y; i++) {
                                 for (var j = 0; j < x; j++) {
@@ -272,8 +275,13 @@ class Options {
                                     counter++;
                                 }
                             }
-                            document.getElementById("drawingTable").style.visibility="visible";
+                            document.getElementById("drawingTable").style.visibility = "visible";
 
+                            //clear the loadTable
+                            var liLength = document.querySelectorAll("li").length;
+                            for (var i = 0; i < liLength; i++) {
+                                document.getElementById(7000 + i).remove();
+                            }
                         });
 
                     }
