@@ -34,6 +34,7 @@ class Table {
 
 
     DisplayTheTable() {
+        
         var id = 0;
         var fieldsize = 20
         for (var i = 0; i < this.yTableSize; i++) {
@@ -73,10 +74,11 @@ class Table {
                 colorArray[i].push(hexColor);
             }
         }
+        
 
         // // document.getElementById('data').value = JSON.stringify(colorArray);
         // console.log(colorArray);
-
+        
 
     }
 }
@@ -140,6 +142,7 @@ class ColorTable {
                 id++;
             }
         }
+        
     }
 }
 
@@ -220,8 +223,10 @@ class Options {
     }
     DisplayTheLoadTable() {
         document.getElementById("load").onclick = function () {
+            // document.getElementById("create").disabled="true";
             document.getElementById("loadTable").style.visibility = "visible";
             document.getElementById("drawingTable").style.visibility = "hidden";
+            // document.getElementById("create").disabled="true";
             var ga;
             $.getJSON("/js/Data.json", function (json) {
 
@@ -243,6 +248,7 @@ class Options {
                     button.style.height = "30px";
                     button.innerHTML = "open";
                     button.style.display = "inline";
+                    
 
 
 
@@ -276,6 +282,10 @@ class Options {
                                 }
                             }
                             document.getElementById("drawingTable").style.visibility = "visible";
+                            
+                            
+                            
+                            
 
                             //clear the loadTable
                             var liLength = document.querySelectorAll("li").length;
