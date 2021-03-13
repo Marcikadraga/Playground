@@ -74,12 +74,6 @@ class Table {
                 colorArray[i].push(hexColor);
             }
         }
-        
-
-        // // document.getElementById('data').value = JSON.stringify(colorArray);
-        // console.log(colorArray);
-        
-
     }
 }
 class ColorField {

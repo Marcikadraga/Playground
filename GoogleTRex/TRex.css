@@ -1,0 +1,21 @@
+#table{
+    
+    width: 1400px;
+    height: 900px;
+    border: 5px solid white;
+    border-radius: 5px;
+    margin: 13px auto;
+    position: relative;
+    background-color: red;
+  }
+  #drawingTable{
+    width:700px;
+    height: 700px; 
+    border: 5px solid white;
+    border-radius: 10px;
+    background-color: blue; 
+    position:absolute;
+    left:25%;
+    top:10%;
+    visibility: hidden;
+}
