@@ -51,44 +51,47 @@ class Table {
             newArray.push([]);
             for (var j = 0; j < this.xTableSize; j++) {
                 newArray[i].push(counter);
-
                 counter++;
-                if (i % 2 == 0 && j % 2 == 0 || i % 2 != 0 && j % 2 != 0) {
-                    document.getElementById(newArray[i][j]).style.background = "rgb(216, 212, 212)";
-                }
-
-
             }
         }
 
         document.getElementById("drawingTable").style.height = this.yTableSize * fieldsize + "px";
         document.getElementById("drawingTable").style.width = this.xTableSize * fieldsize + "px";
-    
-    
+
+
         $.getJSON("Data.json", function (json) {
-           var counter = 0;
+            var counter = 0;
+            var backgroundcolor="rgb(255, 255, 255)"
             const timer = ms => new Promise(res => setTimeout(res, ms))
             async function load() {
                 while (true) {
                     await timer(100);
-    
-    
+                    var leftLegDownDino = json[3].Data;
+                    var rightLegDownDino = json[4].Data;
+                    var dino;
                     if (counter % 2 == 0) {
-                        var dino = json[4].Data;
-                        for (var i = 0; i < dino.length; i++) {
-                            for (var j = 0; j < dino[0].length; j++) {
-                                document.getElementById(newArray[i+130-dino.length][j+6]).style.backgroundColor = dino[i][j];
-    
-                            }
-                        }
+                        dino = leftLegDownDino;
+                    } else {
+                        dino = rightLegDownDino;
                     }
-    
-                    else {
-                        var dino = json[3].Data;
-                        for (var i = 0; i < dino.length; i++) {
-                            for (var j = 0; j < dino[0].length; j++) {
-                                document.getElementById(newArray[i+130-dino.length][j+6]).style.backgroundColor = dino[i][j];
+
+
+                    for (var i = 0; i < dino.length; i++) {
+                        for (var j = 0; j < dino[0].length; j++) {
+                            if(dino[i][j]=="rgb(216, 212, 212)")
+                            {
+                                document.getElementById(newArray[i][j]).style.backgroundColor = backgroundcolor;
                             }
+                            // if(dino[i][j]=="rgb(255, 255, 255)")
+                            // {
+                            //     document.getElementById(newArray[i][j]).style.backgroundColor = backgroundcolor;
+                            // }
+                            else
+                            {
+                                document.getElementById(newArray[i][j]).style.backgroundColor = dino[i][j];
+                            }
+                            
+
                         }
                     }
                     counter++;
@@ -96,7 +99,7 @@ class Table {
             }
             load();
         });
-    
+
     }
     CreateNewTable() {
 
@@ -106,17 +109,13 @@ class Table {
             document.getElementById(i).remove();
         }
 
-
-
-
     }
 }
 class Main {
     StartTheProgram() {
-        var t = new Table(130, 500);
+        var t = new Table(46, 44);
         t.CreateNewTable();
         t.DisplayTheTable();
-        
     }
 }
 var m = new Main();

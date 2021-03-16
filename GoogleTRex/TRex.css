@@ -1,14 +1,14 @@
 #table{
     
     width: 1500px;
-    height: 350px;
-    border: 5px solid white;
+    height: 346px;
+    border: 5px solid black;
     border-radius: 5px;
     margin: 13px auto;
     position: relative;
     top:500px;
     
-    background-color: red;
+    background-color: white;
   }
   #drawingTable{
     /* width:100px;
@@ -16,7 +16,7 @@
     
     background-color: blue; 
     position:absolute;
-    left:0%;
-    top:0%;
+    left:2%;
+    top:60%;
     visibility: hidden;
 }
