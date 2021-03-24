@@ -65,7 +65,7 @@ class Table {
             const timer = ms => new Promise(res => setTimeout(res, ms))
             async function load() {
                 while (true) {
-                    await timer(100);
+                    await timer(150);
                     var leftLegDownDino = json[3].Data;
                     var rightLegDownDino = json[4].Data;
                     var dino;
